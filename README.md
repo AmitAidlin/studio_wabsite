@@ -2,14 +2,14 @@
 
 Structure:
 
-- `docs/` – the built site. **This is what GitHub Pages serves.**
+- `index.html`, `assets/`, `lovable-uploads/`, `favicon.ico`, `robots.txt`, `.nojekyll` – the built site, served by GitHub Pages from the repo root. `index.html` is the home page.
 - `site-source/` – the source code (Vite + React + Tailwind).
 - `archive/` – old files kept for reference.
 
 ## Publish on GitHub Pages
 
-1. Push the repo to GitHub.
-2. Repo → Settings → Pages → Source: **Deploy from a branch** → Branch: `main`, folder: `/docs` → Save.
+1. Commit and push with GitHub Desktop.
+2. Repo → Settings → Pages → Source: **Deploy from a branch** → Branch: `main`, folder: `/ (root)` → Save.
 3. The site will be live at `https://amitaidlin.github.io/studio_wabsite/`.
 
 ## Update the site
@@ -17,11 +17,10 @@ Structure:
 ```bash
 cd site-source
 npm install      # first time only
-npm run dev      # work locally
-npm run build    # rebuilds ../docs
+npm run build    # creates site-source/dist
 ```
 
-Then commit and push the updated `docs/` folder.
+Then copy the contents of `site-source/dist` into the repo root (replace `index.html` and `assets/`), commit and push.
 
 Notes: the site uses hash routes (`#/projects`) so page links work on GitHub Pages.
 The admin / login pages need the Supabase backend configured in `site-source/src/integrations/supabase/client.ts`.
