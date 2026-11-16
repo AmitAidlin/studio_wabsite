@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "aidlin-dev",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+      "runtimeArgs": ["D:\\Documents\\GitHub\\studio_wabsite\\site-source\\node_modules\\vite\\bin\\vite.js"],
+      "cwd": "D:\\Documents\\GitHub\\studio_wabsite\\site-source",
+      "port": 8080
+    }
+  ]
+}
