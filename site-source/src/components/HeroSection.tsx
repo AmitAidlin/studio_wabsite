@@ -13,7 +13,8 @@ const HeroSection = () => {
         <div className="relative w-full h-full">
           <iframe
             ref={iframeRef}
-            src="https://www.youtube.com/embed/bW2WQ9TPOcU?autoplay=1&mute=1&controls=0&loop=1&playlist=bW2WQ9TPOcU&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1"
+            src="https://www.youtube.com/embed/bW2WQ9TPOcU?autoplay=1&mute=1&controls=0&loop=1&playlist=bW2WQ9TPOcU&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&playsinline=1&enablejsapi=1"
+            referrerPolicy="strict-origin-when-cross-origin"
             className="absolute top-1/2 left-1/2 w-screen h-screen min-w-full min-h-full transform -translate-x-1/2 -translate-y-1/2 scale-110"
             style={{
               width: '100vw',

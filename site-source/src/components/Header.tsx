@@ -1,11 +1,13 @@
 
 import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Handle scroll effects for the header
   useEffect(() => {
@@ -21,16 +23,24 @@ const Header = () => {
 
   // Handle menu item clicks to scroll to sections
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      const offsetTop = section.offsetTop;
-      window.scrollTo({
-        top: offsetTop - 100,
-        behavior: "smooth",
-      });
-    }
     // Close mobile menu after click
     setIsMobileMenuOpen(false);
+
+    const scroll = () => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        const top = section.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top, behavior: "smooth" });
+      }
+    };
+
+    // About / Contact live on the home page - go there first if we're on another page
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(scroll, 300);
+    } else {
+      scroll();
+    }
   };
 
   return (
@@ -46,12 +56,6 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex space-x-10">
-            <button 
-              className={`font-light tracking-wide transition-colors duration-300 hover:text-studio-terracotta ${isScrolled ? 'text-studio-dark' : 'text-studio-offwhite'}`}
-              onClick={() => scrollToSection('home')}
-            >
-              Home
-            </button>
             <Link 
               to="/projects"
               className={`font-light tracking-wide transition-colors duration-300 hover:text-studio-terracotta ${isScrolled ? 'text-studio-dark' : 'text-studio-offwhite'}`}
@@ -93,12 +97,6 @@ const Header = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 bg-studio-offwhite shadow-md rounded-b-sm">
             <div className="flex flex-col space-y-4 px-4">
-              <button 
-                className="font-light text-studio-dark hover:text-studio-terracotta text-left"
-                onClick={() => scrollToSection('home')}
-              >
-                Home
-              </button>
               <Link 
                 to="/projects"
                 className="font-light text-studio-dark hover:text-studio-terracotta text-left"
