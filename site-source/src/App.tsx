@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { CartProvider } from "@/contexts/CartContext";
+import CartDrawer from "@/components/CartDrawer";
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
@@ -19,9 +21,11 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
       <TooltipProvider>
+        <CartProvider>
         <HashRouter>
           <Toaster />
           <Sonner />
+          <CartDrawer />
           <div className="font-['Noto_Sans_JP',sans-serif]">
             <Routes>
               <Route path="/" element={<Index />} />
@@ -35,6 +39,7 @@ const App = () => (
             </Routes>
           </div>
         </HashRouter>
+        </CartProvider>
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>
