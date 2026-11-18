@@ -1,5 +1,7 @@
-// Product catalog. To add a product: add an image to site-source/public/products/
-// and add a new object to this list.
+// The product list is generated from shop/products.xlsx by `npm run update-shop`.
+// Don't edit products.json by hand - edit the Excel file instead.
+import productsData from "./products.json";
+
 export type ShopProduct = {
   id: string;
   name: string;
@@ -11,17 +13,7 @@ export type ShopProduct = {
 
 export const CURRENCY = "₪";
 
-export const shopProducts: ShopProduct[] = [
-  {
-    id: "espresso-cup-blue",
-    name: "Pair of Espresso Cups – Teal Green",
-    description:
-      "A pair of 3D-printed ceramic espresso cups in a bluish-green glaze, with a twisted rope texture and a dark raw-clay rim. Printed layer by layer and finished by hand. One of a kind.",
-    price: 125,
-    image: "espresso-cup-blue.jpg",
-    oneOfAKind: true,
-  },
-];
+export const shopProducts: ShopProduct[] = productsData as ShopProduct[];
 
 export const productImageUrl = (image: string) =>
   `${import.meta.env.BASE_URL}products/${image}`;

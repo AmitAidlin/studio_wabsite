@@ -12,6 +12,11 @@ Structure:
 2. Repo → Settings → Pages → Source: **Deploy from a branch** → Branch: `main`, folder: `/ (root)` → Save.
 3. The site will be live at `https://amitaidlin.github.io/studio_wabsite/`.
 
+## Shop products (Excel)
+
+Products are managed in `shop/products.xlsx` (photos go in `shop/photos`).
+After editing the file, run `npm run update-shop` inside `site-source` (or ask Claude), then Commit + Push.
+
 ## Update the site
 
 ```bash

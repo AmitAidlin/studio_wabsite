@@ -1,0 +1,18 @@
+[
+  {
+    "id": "pair-of-espresso-cups-teal-green",
+    "name": "Pair of Espresso Cups – Teal Green",
+    "description": "A pair of 3D-printed ceramic espresso cups in a bluish-green clay, with a twisted rope texture and a dark glaze inside. One of a kind.",
+    "price": 125,
+    "image": "pair-of-espresso-cups-teal-green.jpg",
+    "oneOfAKind": true
+  },
+  {
+    "id": "set-of-six-espresso-cups-black",
+    "name": "Set of six Espresso Cups – Black",
+    "description": "A hanging set of handmade espresso cups in dark clay, 3D-printed layer by layer with a twisted rope texture and a smooth black rim. Carried in a woven bamboo holder, ready to hang on the wall or serve. One of a kind.",
+    "price": 350,
+    "image": "set-of-six-espresso-cups-black.jpg",
+    "oneOfAKind": true
+  }
+]
