@@ -1,1 +1,92 @@
-[]
+[
+  {
+    "id": "the-israeli-biennale-leviathan",
+    "type": "Exhibition",
+    "title": "The Israeli Biennale – \"Leviathan\"",
+    "date": "2023",
+    "location": "Tel Aviv, Israel",
+    "description": "Participant with the Design-Tech Lab.",
+    "link": "",
+    "image": ""
+  },
+  {
+    "id": "the-israeli-biennale-hit-ceramic-department-exhibition",
+    "type": "Exhibition",
+    "title": "The Israeli Biennale – HIT Ceramic Department exhibition",
+    "date": "2023",
+    "location": "Tel Aviv, Israel",
+    "description": "Participant with \"Weaving code\"- my final project from B.A industrial Design, the Holon Institute of Technology.",
+    "link": "",
+    "image": ""
+  },
+  {
+    "id": "3d-printed-exhibition",
+    "type": "Exhibition",
+    "title": "3D Printed exhibition",
+    "date": "2023",
+    "location": "Science Museum, Jerusalem",
+    "description": "Participant with \"Weaving code\"- my final project from B.A industrial Design, the Holon Institute of Technology.",
+    "link": "",
+    "image": ""
+  },
+  {
+    "id": "fresh-paint-israeli-commercial-design-exhibition",
+    "type": "Exhibition",
+    "title": "Fresh Paint – Israeli commercial design exhibition",
+    "date": "2023",
+    "location": "Israel",
+    "description": "Participant with a 3D-printed espresso cups set.",
+    "link": "",
+    "image": ""
+  },
+  {
+    "id": "ceramic-exhibition",
+    "type": "Exhibition",
+    "title": "Ceramic exhibition",
+    "date": "2022",
+    "location": "Paris Design Week",
+    "description": "Participant with \"Weaving code\"- my final project from B.A industrial Design, the Holon Institute of Technology.",
+    "link": "",
+    "image": ""
+  },
+  {
+    "id": "package-design-award",
+    "type": "Award",
+    "title": "Package design award",
+    "date": "2020",
+    "location": "The Israeli Institute of Packaging",
+    "description": "Winner of the Israeli Institute of Packaging award for a package design.",
+    "link": "",
+    "image": ""
+  },
+  {
+    "id": "reef-plant-design-tech",
+    "type": "Project",
+    "title": "Reef-Plant, Design- Tech",
+    "date": "2026",
+    "location": "Technion – Design-Tech Lab",
+    "description": "Ceramic 3D-printed design and assessment for coral out-planting. Published in Ecological Engineering (Elsevier), volume 232.",
+    "link": "",
+    "image": ""
+  },
+  {
+    "id": "barbend-parametric-reversible-solid-wood-bending",
+    "type": "Project",
+    "title": "BarBend – parametric, reversible solid wood bending",
+    "date": "2024",
+    "location": "eCAADe 42",
+    "description": "Parametric and reversible solid wood bending through CNC cutting. Co-authored paper presented at eCAADe 42.",
+    "link": "",
+    "image": ""
+  },
+  {
+    "id": "artificial-coral-reef-through-generative-design",
+    "type": "Project",
+    "title": "Artificial coral reef through generative design",
+    "date": "2023 – present",
+    "location": "Technion – Israel Institute of Technology",
+    "description": "Doctoral research on the design and development of artificial coral nurseries using generative design methods and clay 3D printing.",
+    "link": "",
+    "image": ""
+  }
+]

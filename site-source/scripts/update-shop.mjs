@@ -118,6 +118,9 @@ function deploy() {
   fs.rmSync(path.join(repoRoot, "products"), { recursive: true, force: true });
   fs.rmSync(path.join(repoRoot, "projects"), { recursive: true, force: true });
   fs.cpSync(dist, repoRoot, { recursive: true });
+  // no project photos -> don't leave an empty "projects" folder in the repo root
+  const rootProjects = path.join(repoRoot, "projects");
+  if (fs.existsSync(rootProjects) && fs.readdirSync(rootProjects).length === 0) fs.rmdirSync(rootProjects);
 }
 
 // ---- Projects & Exhibitions (Projects & Exhibitions/projects.xlsx) ----
