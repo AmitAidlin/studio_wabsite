@@ -2,3 +2,7 @@
 dist
 .claude
 
+
+# private documents - never publish
+Projects & Exhibitions/*.pdf
+Projects & Exhibitions/~$*

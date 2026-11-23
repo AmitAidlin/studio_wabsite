@@ -116,8 +116,90 @@ function deploy() {
     }
   }
   fs.rmSync(path.join(repoRoot, "products"), { recursive: true, force: true });
+  fs.rmSync(path.join(repoRoot, "projects"), { recursive: true, force: true });
   fs.cpSync(dist, repoRoot, { recursive: true });
 }
+
+// ---- Projects & Exhibitions (Projects & Exhibitions/projects.xlsx) ----
+// Columns: A type (Exhibition/Project/Award) | B title | C year/date | D location | E description
+//          F image file (optional) | G link (optional) | H approved by owner (yes/no)
+// Only rows with H = yes are published.
+const pxDir = path.join(repoRoot, "Projects & Exhibitions");
+const pxXlsx = path.join(pxDir, "projects.xlsx");
+const pxPhotos = path.join(pxDir, "photos");
+const pxPublic = path.join(siteSource, "public", "projects");
+const pxData = path.join(siteSource, "src", "data", "projects.json");
+
+async function readProjects() {
+  if (!fs.existsSync(pxXlsx)) return [];
+  const wb = new ExcelJS.Workbook();
+  await wb.xlsx.readFile(pxXlsx);
+  const ws = wb.worksheets[0];
+  const items = [];
+  const used = new Set();
+  ws.eachRow((row, n) => {
+    if (n === 1) return;
+    const title = cellText(row.getCell(2).value).replace(/\s+/g, " ");
+    if (!title) return;
+    if (!yes(row.getCell(8).value)) {
+      console.log(`  projects row ${n}: "${title}" is not approved (H) -> not published`);
+      return;
+    }
+    const typeRaw = cellText(row.getCell(1).value).toLowerCase();
+    const type = typeRaw.startsWith("exh") ? "Exhibition" : typeRaw.startsWith("aw") ? "Award" : "Project";
+    const imageName = cellText(row.getCell(6).value);
+    let source = "";
+    if (imageName && fs.existsSync(pxPhotos)) {
+      const files = fs.readdirSync(pxPhotos);
+      const want = imageName.toLowerCase();
+      const found =
+        files.find((f) => f.toLowerCase() === want) ??
+        files.find((f) => path.parse(f).name.toLowerCase() === want && !/\(edited\)/i.test(f));
+      if (!found) console.warn(`  projects row ${n}: image not found in Projects & Exhibitions/photos: ${imageName} (published without image)`);
+      else {
+        const edited = `${path.parse(found).name} (edited).jpg`;
+        source = fs.existsSync(path.join(pxPhotos, edited)) ? edited : found;
+      }
+    }
+    let id = slug(title);
+    for (let i = 2; used.has(id); i++) id = `${slug(title)}-${i}`;
+    used.add(id);
+    items.push({
+      id,
+      type,
+      title,
+      date: cellText(row.getCell(3).value),
+      location: cellText(row.getCell(4).value),
+      description: cellText(row.getCell(5).value),
+      link: cellText(row.getCell(7).value),
+      source,
+      image: source ? `${id}.jpg` : "",
+    });
+  });
+  return items;
+}
+
+async function prepareProjectImages(items) {
+  fs.mkdirSync(pxPublic, { recursive: true });
+  for (const p of items) {
+    if (!p.source) continue;
+    await sharp(path.join(pxPhotos, p.source))
+      .rotate()
+      .resize({ width: 1000, withoutEnlargement: true })
+      .jpeg({ quality: 85 })
+      .toFile(path.join(pxPublic, p.image));
+  }
+  const keep = new Set(items.map((p) => p.image).filter(Boolean));
+  for (const f of fs.readdirSync(pxPublic)) {
+    if (!keep.has(f)) fs.rmSync(path.join(pxPublic, f), { force: true });
+  }
+}
+
+const projectItems = await readProjects();
+console.log(`\n${projectItems.length} project/exhibition item(s) will be on the site:`);
+projectItems.forEach((p) => console.log(`  - [${p.type}] ${p.title} (${p.date})`));
+await prepareProjectImages(projectItems);
+fs.writeFileSync(pxData, JSON.stringify(projectItems.map(({ source, ...rest }) => rest), null, 2) + "\n");
 
 const products = await readProducts();
 console.log(`\n${products.length} product(s) will be on the site:`);
