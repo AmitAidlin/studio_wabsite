@@ -40,7 +40,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   const value = useMemo<CartContextType>(() => {
     const lines = items
       .map((l) => ({ ...l, product: shopProducts.find((p) => p.id === l.id) }))
-      .filter((l): l is CartLine & { product: ShopProduct } => !!l.product);
+      .filter((l): l is CartLine & { product: ShopProduct } => !!l.product && !l.product.outOfStock);
 
     return {
       lines,

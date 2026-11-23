@@ -35,6 +35,7 @@ async function readProducts() {
   const ws = wb.worksheets[0];
 
   // Columns: A image file | B name | C description | D price | E one of a kind | F show on site
+  //          G stock quantity (entered by the owner) | H sold so far | I out of stock on site
   const products = [];
   const used = new Set();
   ws.eachRow((row, n) => {
@@ -76,6 +77,8 @@ async function readProducts() {
       source: useImage,
       image: `${id}.jpg`,
       oneOfAKind: yes(row.getCell(5).value),
+      // column I is set to "yes" only after the owner approved marking it as out of stock
+      outOfStock: yes(row.getCell(9).value),
     });
   });
   return products;

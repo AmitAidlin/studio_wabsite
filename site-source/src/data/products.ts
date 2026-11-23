@@ -9,6 +9,7 @@ export type ShopProduct = {
   price: number; // in ILS
   image: string; // file name inside public/products
   oneOfAKind?: boolean; // only one piece exists - can't be ordered more than once
+  outOfStock?: boolean; // temporarily out of stock - can't be added to the cart
 };
 
 export const CURRENCY = "₪";

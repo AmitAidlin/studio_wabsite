@@ -44,6 +44,9 @@ const Products = () => {
                   className="w-full aspect-square object-cover object-[50%_75%] bg-gray-100"
                 />
                 <CardContent className="pt-5 flex-1">
+                  {product.outOfStock && (
+                    <span className="inline-block text-xs tracking-widest uppercase text-studio-terracotta mb-2 mr-3">Out of stock</span>
+                  )}
                   {product.oneOfAKind && (
                     <span className="inline-block text-xs tracking-widest uppercase text-studio-gray mb-2">One of a kind</span>
                   )}
@@ -55,6 +58,20 @@ const Products = () => {
                   <p className="text-gray-600 mt-3 text-sm leading-relaxed">{product.description}</p>
                 </CardContent>
                 <CardFooter>
+                  {product.outOfStock ? (
+                    <div className="w-full">
+                      <p className="text-sm text-gray-600 mb-3">
+                        Temporarily out of stock. Contact us to place a private order.
+                      </p>
+                      <Button
+                        variant="outline"
+                        className="w-full border-studio-terracotta text-studio-terracotta hover:bg-studio-terracotta/10 rounded-sm font-light"
+                        onClick={goToContact}
+                      >
+                        Contact for a private order
+                      </Button>
+                    </div>
+                  ) : (
                   <Button
                     className="w-full bg-studio-terracotta hover:bg-studio-terracotta/90 text-studio-offwhite py-2 rounded-sm font-light flex items-center gap-2"
                     onClick={() => {
@@ -69,6 +86,7 @@ const Products = () => {
                   >
                     <ShoppingBag size={16} /> Add to cart
                   </Button>
+                  )}
                 </CardFooter>
               </Card>
             ))}
